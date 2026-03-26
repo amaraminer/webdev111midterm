@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshBite Prep | Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="logo">🥗 FreshBite<span>Prep</span></div>
+            <div class="nav-links">
+                <a href="#meals">Meals</a>
+                <a href="#billing">Billing</a>
+                <a href="#plans">Plans</a>
+                <div class="user-avatar" onclick="toggleDrawer()">SG</div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-inner">
+            <span class="badge">New Menu Available</span>
+            <h1>Simplify Your Nutrition.<br><span>Elevate Your Life.</span></h1>
+            <p>Chef-curated healthy meals delivered to your doorstep.</p>
+            <div class="hero-actions">
+                <button class="btn btn-primary" onclick="scrollToSection('plans')">Get Started</button>
+                <button class="btn btn-outline" onclick="showNutrients()">Nutrition Facts 📊</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="meals" class="section container">
+        <h2 class="section-title">Our Signature Dishes</h2>
+        <div class="food-grid">
+            <div class="food-card">
+                <img src="salmonsalad.jpg" alt="Salmon">
+                <div class="card-content">
+                    <h4>Salmon Salad</h4>
+                    <span>350 kcal</span>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="ketobowl.jpg" alt="Keto">
+                <div class="card-content">
+                    <h4>Keto Power Bowl</h4>
+                    <span>420 kcal</span>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="veganpasta.png" alt="Pasta">
+                <div class="card-content">
+                    <h4>Vegan Pasta</h4>
+                    <span>310 kcal</span>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="proteinwrap.jpg" alt="Wrap">
+                <div class="card-content">
+                    <h4>Protein Wrap</h4>
+                    <span>380 kcal</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="billing" class="section bg-light">
+        <div class="container billing-grid">
+            <div class="billing-card history">
+                <h3>Subscription History</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Plan</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Mar 01, 2026</td><td>Starter Pack</td><td><span class="status">Paid</span></td><td>₱1,500</td></tr>
+                        <tr><td>Feb 01, 2026</td><td>Starter Pack</td><td><span class="status">Paid</span></td><td>₱1,500</td></tr>
+                    </tbody>
+                </table>
+            </div>
+<div class="billing-card payment">
+    <h3>Payment</h3>
+    <div class="credit-card">
+        <p class="card-number">**** **** **** 1234</p>
+        <p class="card-holder">STEVEN GARAO</p>
+    </div>
+    <button class="btn-sm">Update Details</button>
+</div>
+    </section>
+
+    <section id="plans" class="section container">
+        <h2 class="section-title">Tailored To Your Lifestyle</h2>
+        <div class="plans-grid">
+            <div class="plan-card">
+                <h3>Starter Pack</h3>
+                <div class="price">₱1,500<span>/wk</span></div>
+                <ul>
+                    <li>✓ 5 Balanced Meals</li>
+                    <li>✓ Standard Delivery</li>
+                    <li>✓ Macro Tracking</li>
+                </ul>
+                <button class="btn btn-primary full">Subscribe Now</button>
+            </div>
+            <div class="plan-card featured">
+                <div class="popular">Best Seller</div>
+                <h3>Family Feast</h3>
+                <div class="price">₱4,500<span>/wk</span></div>
+                <ul>
+                    <li>✓ 20 Gourmet Meals</li>
+                    <li>✓ Priority 24/7 Support</li>
+                    <li>✓ Free Weekly Consultation</li>
+                </ul>
+                <button class="btn btn-dark full">Subscribe Now</button>
+            </div>
+        </div>
+    </section>
+
+    <div id="overlay" class="overlay" onclick="toggleDrawer()"></div>
+    <div id="drawer" class="drawer">
+        <button class="close-btn" onclick="toggleDrawer()">×</button>
+        <div class="drawer-user">
+            <div class="avatar-lg">SG</div>
+            <h3>Steven Garao</h3>
+            <p>Premium Member</p>
+        </div>
+        <div class="drawer-menu">
+            <a href="#">Account Settings</a>
+            <a href="#">Order Tracker</a>
+            <a href="login.html" class="logout">Logout</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
