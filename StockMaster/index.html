@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockMaster | Industrial Retail Ops</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-wrapper">
+            <div class="brand">
+                <div class="barcode-icon"></div>
+                <span class="brand-text">STOCKMASTER</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#stock" class="nav-item">Stock</a></li>
+                <li><a href="#suppliers" class="nav-item">Suppliers</a></li>
+                <li><a href="#orders" class="nav-item">Orders</a></li>
+                <li><a href="#reports" class="nav-item highlight-item">Reports</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="#login" class="btn btn-flat">Log In</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <div class="status-indicator">
+                    <span class="blinking-dot"></span> SYSTEM ONLINE
+                </div>
+                <h1>RETAIL <br>LOGISTICS <br>CONTROL.</h1>
+                <p>Flat, fast, and highly functional. Command your inventory, suppliers, and orders without the visual clutter.</p>
+                <a href="#login" class="btn btn-action btn-massive">INITIALIZE SETUP</a>
+            </div>
+            <div class="hero-graphic">
+                <div class="wireframe-box">
+                    <div class="barcode-large"></div>
+                    <p class="asset-tag">ASSET ID: SM-8849-01</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="stock" class="data-sector">
+        <div class="sector-header">
+            <h2>// INVENTORY_STOCK</h2>
+            <button class="btn btn-flat">ADD ITEM +</button>
+        </div>
+        <div class="brutal-grid">
+            <div class="brutal-card">
+                <div class="card-id">SKU-0912</div>
+                <h3>HEAVY DUTY SHELVING</h3>
+                <div class="stock-level">QTY: 1,024 <span>[STABLE]</span></div>
+            </div>
+            <div class="brutal-card alert-card">
+                <div class="card-id">SKU-0913</div>
+                <h3>PALLET JACKS</h3>
+                <div class="stock-level">QTY: 12 <span class="warning-text">[CRITICAL]</span></div>
+            </div>
+            <div class="brutal-card">
+                <div class="card-id">SKU-0914</div>
+                <h3>PACKAGING TAPE (BULK)</h3>
+                <div class="stock-level">QTY: 5,400 <span>[STABLE]</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="suppliers" class="data-sector bg-dark">
+        <div class="sector-header invert-text">
+            <h2>// SUPPLIERS_NETWORK</h2>
+        </div>
+        <table class="brutal-table">
+            <thead>
+                <tr>
+                    <th>VENDOR_ID</th>
+                    <th>COMPANY NAME</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>VND-01</td>
+                    <td>Apex Logistics Corp.</td>
+                    <td>ACTIVE</td>
+                </tr>
+                <tr>
+                    <td>VND-02</td>
+                    <td>Global Freight Ltd.</td>
+                    <td class="warning-text">DELAYED</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="orders" class="data-sector">
+        <div class="sector-header">
+            <h2>// OUTBOUND_ORDERS</h2>
+        </div>
+        <div class="order-queue">
+            <div class="queue-item">
+                <span class="queue-id">#ORD-991</span>
+                <span class="queue-dest">MANIFEST: WAREHOUSE B</span>
+                <span class="queue-status status-go">DISPATCHED</span>
+            </div>
+            <div class="queue-item">
+                <span class="queue-id">#ORD-992</span>
+                <span class="queue-dest">MANIFEST: SECTOR 4</span>
+                <span class="queue-status status-wait">PENDING</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="reports" class="data-sector highlight-sector">
+        <div class="sector-header">
+            <h2>// SYSTEM_REPORTS</h2>
+            <span class="badge">LIVE DATA</span>
+        </div>
+        <div class="report-dashboard">
+            <div class="report-stat">
+                <h4>QUARTERLY REVENUE</h4>
+                <div class="stat-number">$1.2M</div>
+            </div>
+            <div class="report-stat">
+                <h4>EFFICIENCY RATING</h4>
+                <div class="stat-number">98.4%</div>
+            </div>
+            <div class="report-stat">
+                <h4>SYSTEM ALERTS</h4>
+                <div class="stat-number warning-text">03</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="login" class="auth-sector">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>OPERATOR LOGIN</h2>
+                <p>VERIFY CREDENTIALS</p>
+            </div>
+            
+            <form class="auth-form">
+                <div class="input-block">
+                    <label for="ops-id">OPERATOR ID</label>
+                    <input type="text" id="ops-id" placeholder="e.g. USR-9921" required>
+                </div>
+                <div class="input-block">
+                    <label for="ops-pass">PASSCODE</label>
+                    <input type="password" id="ops-pass" placeholder="••••••••" required>
+                </div>
+                
+                <div class="auth-footer">
+                    <label class="checkbox-container">
+                        <input type="checkbox">
+                        <span class="checkmark"></span>
+                        OVERRIDE TIMEOUT
+                    </label>
+                    <a href="#" class="forgot-link">RESET KEY</a>
+                </div>
+
+                <button type="submit" class="btn btn-action btn-full">
+                    AUTHORIZE ACCESS
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="caution-footer">
+        <div class="ticker-tape">
+            <span>// STOCKMASTER RETAIL SYSTEMS // UNAUTHORIZED ACCESS IS LOGGED AND TRACED // V.4.0.9 //</span>
+        </div>
+    </footer>
+</body>
+</html>
