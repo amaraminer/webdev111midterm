@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LibryConnect | Vintage-Modern Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Space+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================================
+           LIBRYCONNECT - VINTAGE-MODERN PALETTE & TYPOGRAPHY
+           ========================================================= */
+        :root {
+            --paper-cream: #F7F4EB;
+            --ink-charcoal: #2C302E;
+            --vintage-red: #B83A26;
+            --library-green: #2B5945;
+            --faded-blue: #A2B9C6;
+            --card-lines: #D9E2E8;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'DM Sans', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--paper-cream);
+            color: var(--ink-charcoal);
+            font-family: var(--font-sans);
+            /* Subtle paper texture noise via CSS radial gradients */
+            background-image: radial-gradient(#d4d0c4 1px, transparent 1px);
+            background-size: 20px 20px;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVIGATION ================= */
+        nav {
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand h1 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            font-size: 2.5rem;
+            color: var(--library-green);
+            letter-spacing: -1px;
+            cursor: pointer;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--ink-charcoal);
+            font-weight: 500;
+            font-size: 1.1rem;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s;
+        }
+
+        /* Modern hover underline effect */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--vintage-red);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-info-btn {
+            background: transparent;
+            border: 1px solid var(--vintage-red);
+            color: var(--vintage-red);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-info-btn:hover {
+            background: var(--vintage-red);
+            color: var(--paper-cream);
+        }
+
+        /* ================= HERO & SEARCH CENTRIC ================= */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+            text-align: center;
+            padding: 0 2rem;
+            transition: min-height 0.5s ease;
+        }
+
+        .hero-section.searched {
+            min-height: 30vh; /* Shrinks smoothly when results appear */
+        }
+
+        .hero-section h2 {
+            font-family: var(--font-serif);
+            font-size: 4rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            color: var(--ink-charcoal);
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1.5rem 2rem;
+            font-size: 1.5rem;
+            font-family: var(--font-sans);
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid var(--library-green);
+            border-radius: 12px;
+            color: var(--ink-charcoal);
+            box-shadow: 0 10px 30px rgba(43, 89, 69, 0.1);
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 15px 40px rgba(43, 89, 69, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .search-bar::placeholder {
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: #888;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            bottom: 10px;
+            background: var(--library-green);
+            color: var(--paper-cream);
+            border: none;
+            border-radius: 8px;
+            padding: 0 2rem;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #1f4233;
+        }
+
+        /* ================= RESULTS / LIBRARY CARDS ================= */
+        .results-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .results-section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* The Vintage-Modern Library Card Design */
+        .book-card {
+            background: #fff;
+            border-radius: 4px;
+            padding: 2.5rem 2rem;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            border-top: 15px solid var(--faded-blue);
+            /* Ruled lines effect like an old index card */
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 39px,
+                var(--card-lines) 39px,
+                var(--card-lines) 40px
+            );
+            background-attachment: local;
+            line-height: 40px;
+        }
+
+        .book-card::before {
+            content: 'DUE DATE SLIP';
+            position: absolute;
+            top: -35px;
+            left: 20px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--faded-blue);
+            letter-spacing: 2px;
+        }
+
+        .book-title {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.5rem;
+            background: #fff; /* covers the lines behind text */
+            display: inline-block;
+            padding-right: 10px;
+        }
+
+        .book-author {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            background: #fff;
+            display: inline-block;
+        }
+
+        .book-status {
+            font-weight: 700;
+            color: var(--library-green);
+            background: #fff;
+            display: inline-block;
+            padding-right: 10px;
+        }
+
+        /* Library Card Button */
+        .card-btn {
+            display: block;
+            width: 100%;
+            margin-top: 2rem;
+            background: var(--paper-cream);
+            border: 1px dashed var(--ink-charcoal);
+            padding: 10px;
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .card-btn:hover {
+            background: var(--ink-charcoal);
+            color: var(--paper-cream);
+        }
+
+        .card-btn.stamped {
+            background: transparent;
+            border: 3px solid var(--vintage-red);
+            color: var(--vintage-red);
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.2rem;
+            transform: rotate(-2deg); /* Gives it a "hand-stamped" feel */
+            pointer-events: none; /* Disables clicking again */
+        }
+
+        /* ================= LOGIN/REG VINTAGE MODAL ================= */
+        .login-wrapper {
+            max-width: 400px;
+            margin: 5rem auto;
+            background: #fff;
+            padding: 3rem 2rem;
+            border: 1px solid #ccc;
+            box-shadow: 10px 10px 0px rgba(43, 89, 69, 0.1);
+            position: relative;
+        }
+
+        .login-wrapper h3 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--ink-charcoal);
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-bottom: 1px dashed var(--ink-charcoal);
+            background: transparent;
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-bottom: 2px solid var(--library-green);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: var(--ink-charcoal);
+            color: var(--paper-cream);
+            border: none;
+            padding: 15px;
+            font-family: var(--font-sans);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .login-btn:hover {
+            background: var(--library-green);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="brand">
+            <h1>LibryConnect.</h1>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Members</a></li>
+            <li><a href="#login">Loans</a></li>
+        </ul>
+        <button class="nav-info-btn">Overdue: 0</button>
+    </nav>
+
+    <main>
+        <section class="hero-section" id="hero">
+            <h2>The archives await.</h2>
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-bar" placeholder="Search by title, author, or keyword...">
+                <button id="searchBtn" class="search-btn">Locate</button>
+            </div>
+        </section>
+
+        <section class="results-section" id="resultsArea">
+            </section>
+
+        <section id="login" class="login-wrapper">
+            <h3>Library Card Issue</h3>
+            <div class="input-group">
+                <label>PATRON ID / EMAIL</label>
+                <input type="text" placeholder="Enter your credentials">
+            </div>
+            <div class="input-group">
+                <label>PIN</label>
+                <input type="password" placeholder="••••••••">
+            </div>
+            <button class="login-btn">Validate Card</button>
+        </section>
+    </main>
+
+    <script>
+        // Dummy Database of Books
+        const libraryDB = [
+            { id: 1, title: "The Art of Typography", author: "Emil Ruder", status: "Available" },
+            { id: 2, title: "Grid Systems in Graphic Design", author: "Josef Müller-Brockmann", status: "Available" },
+            { id: 3, title: "Interaction of Color", author: "Josef Albers", status: "Available" }
+        ];
+
+        const searchBtn = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+        const resultsArea = document.getElementById('resultsArea');
+        const hero = document.getElementById('hero');
+
+        // Function to handle the Search Flow
+        function performSearch() {
+            const query = searchInput.value.trim();
+            if(query === "") return;
+
+            // 1. Shrink Hero Section & Show Results Area
+            hero.classList.add('searched');
+            resultsArea.innerHTML = ''; // clear previous
+
+            // 2. Render Cards based on dummy data
+            libraryDB.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card';
+                card.innerHTML = `
+                    <div class="book-title">${book.title}</div><br>
+                    <div class="book-author">By ${book.author}</div><br>
+                    <div class="book-status">Status: ${book.status}</div>
+                    <button class="card-btn" onclick="placeHold(this)">Place Hold / Loan</button>
+                `;
+                resultsArea.appendChild(card);
+            });
+
+            // Trigger CSS fade-in animation
+            setTimeout(() => {
+                resultsArea.classList.add('active');
+            }, 100);
+        }
+
+        // Search Triggers
+        searchBtn.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') performSearch();
+        });
+
+        // 3 & 4. Place Hold / Track Due Date Flow
+        function placeHold(btnElement) {
+            // Calculate a dummy due date (14 days from now)
+            let dueDate = new Date();
+            dueDate.setDate(dueDate.getDate() + 14);
+            let formattedDate = dueDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+            // Animate button into a "Vintage Stamp"
+            btnElement.innerText = `LOANED - DUE: ${formattedDate}`;
+            btnElement.classList.add('stamped');
+            
+            // Update Status text dynamically
+            let statusDiv = btnElement.previousElementSibling;
+            statusDiv.innerText = "Status: Loaned to Patron";
+            statusDiv.style.color = "var(--vintage-red)";
+        }
+    </script>
+</body>
+</html>
